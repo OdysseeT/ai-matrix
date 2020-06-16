@@ -67,7 +67,7 @@ echo "##########################################"
 echo "###        BERT_Tensorflow             ###"
 echo "##########################################"
 cd BERT_Tensorflow
-./prepare_dataset.sh
+#./prepare_dataset.sh
 cd ..
 
 echo "##########################################"

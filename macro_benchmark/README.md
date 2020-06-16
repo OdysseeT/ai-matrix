@@ -20,7 +20,7 @@ If you want to test NVIDIA GPU, please run the benchmark suite in the docker rel
 sudo docker login nvcr.io
 ```
 Enter the username and password shown in https://ngc.nvidia.com/configuration/api-key. To get the password, following the instructions on this webpage to generate API key.
-4. Download the docker, AI Matrix needs a tensorflow 
+4. Download the docker, AI Matrix needs a tensorflow
 ```
 sudo docker pull nvcr.io/nvidia/tensorflow:19.09-py3
 ```
@@ -34,10 +34,11 @@ If you are using the latest docker, which has integrated nvidia-docker, use the 
 ```
 sudo docker run --name aimatrix-pt --gpus all --privileged=true --network=host --ipc=host -it --rm -v /data:/data nvcr.io/nvidia/tensorflow:19.05-py3
 ```
+```
 sudo docker run --gpus all --privileged=true --shm-size=1g --ulimit memlock=-1 --ulimit stack=67108864 -it --rm -v /data:/data nvcr.io/nvidia/tensorflow:19.09-py3
 ```  
 
-3. Run the benchmark suite in NVIDIA docker by following the instructions below.
+## 3. Run the benchmark suite in NVIDIA docker by following the instructions below.
 
 The below instructions are recommended to run within the aforementioned NVIDIA docker.
 
@@ -74,16 +75,16 @@ to run training and use
 ```
 to run inference. Note that for DeepInterest, inference needs the checkpoints dumped by training as input, thus, to run the inference of these two tests training must be ran first. The run-infer.sh script will automatically run training first before inference if it detects that training has not been run for DeepInterest.
 
-## 3. Run a Single Benchmark
+## 4. Run a Single Benchmark
 The instructions to run a single benchmark can be found in the README.md file in each test directory.
 
-## 4. Run Training on Multiple Accelerators
+## 5. Run Training on Multiple Accelerators
 To run training on multiple accelerators, please set NUM_ACCELERATORS environment variable in your terminal before running the run.sh or run-train.sh scripts, e.g.,
 ```
 export NUM_ACCELERATORS=8
 ```
 
-## 5. Results
+## 6. Results
 Besides running training and inference, the run scripts also automatically generate the benchmark results. The results are dumped in macro_benchmark/results. There are two csv files for each test, one for training and one for inference. All results are summarized in two excel files, results_train.xlsx for training results and results_infer.xlsx for inference results.
 
 A script is also provided to automatically compare the results of two systems. For example, if you have run the benchmark suite on one system with an NVIDIA P100 GPU and another system with an NVIDIA V100 GPU and the results are put in two directories P100 and V100 respectively, you can compare P100 performance with V100 performance by running the following command and get the normalized P100 performance over V100.
@@ -92,22 +93,22 @@ python compare_results.py --target_dir P100 --ref_dir V100
 ```
 The normalized results are put in a folder named P100_vs_V100. See the compare_results.py script for detailed usage information.
 
-## 6. Run Inference Benchmark with Tensor RT  
+## 7. Run Inference Benchmark with Tensor RT  
 Currently CNN_Tensorflow, CNN_Caffe and SSD_Caffe has tensor RT implementations. Different precision type like fp32, fp16 and int8 can be tested.  
 ```
 export CUDA_VISIBLE_DEVICES=id   #assign the GPU to run the benchmarks  
 ./setup-trt.sh  
-cd pretrained_models 
+cd pretrained_models
 ./download_models.sh
 cd ..
 ./run-infer-trt-tf-{fp32/fp16/int8}.sh  
 ./process_results_trt_{fp32/fp16/int8}.sh  
 ```
 Then the results are listed in   
-   results_trt_ {fp32/fp16/int8} 
+   results_trt_ {fp32/fp16/int8}
 
 
-## 7. Other Tests
+## 8. Other Tests
 Except for the aforementioned five tests, there are also two other tests in the macro benchmark category: CNN_Caffe and DeepSpeech. The reason that these two tests are not put together with the aforementioned five is that they can only be ran on GPU accelerator, while the objective of AI Matrix is to support all kinds of AI accelerators, not only GPUs. Users can still run these two tests on systems with GPUs by following the guide in the README.md files in CNN_Caffe and DeepSpeech directories.
 
 In the future, the support of all accelerators other than GPU will be added in these two tests.

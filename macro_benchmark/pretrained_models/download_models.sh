@@ -15,29 +15,29 @@ cd CNN_Tensorflow
 
 if [ ! -f "imagenet_validation_TF.tgz" ]; then
 	wget https://zenodo.org/record/3470355/files/imagenet_validation_TF.tgz
+	tar -xzvf imagenet_validation_TF.tgz
 fi
 
 if [ ! -f "log_densenet121.tgz" ]; then
 	wget https://zenodo.org/record/3470355/files/log_densenet121.tgz
+	tar -xzvf log_densenet121.tgz
 fi
 
 if [ ! -f "log_googlenet.tgz" ]; then
 	wget https://zenodo.org/record/3470355/files/log_googlenet.tgz
+	tar -xzvf log_googlenet.tgz
 fi
 
 if [ ! -f "log_resnet152.tgz" ]; then
 	wget https://zenodo.org/record/3470355/files/log_resnet152.tgz
+	tar -xzvf log_resnet152.tgz
 fi
 
 if [ ! -f "log_resnet50.tgz" ]; then
 	wget https://zenodo.org/record/3470355/files/log_resnet50.tgz
+	tar -xzvf log_resnet50.tgz
 fi
 
-tar -xzvf imagenet_validation_TF.tgz
-tar -xzvf log_googlenet.tgz
-tar -xzvf log_resnet50.tgz
-tar -xzvf log_resnet152.tgz
-tar -xzvf log_densenet121.tgz
 
 if [ ! -d "graphs_NCHW" ]; then
 	mkdir graphs_NCHW
@@ -90,4 +90,3 @@ else
         echo "Dataset checksum fail"
         exit 1
 fi
-

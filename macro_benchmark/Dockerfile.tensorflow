@@ -1,0 +1,10 @@
+FROM nvcr.io/nvidia/tensorflow:19.09-py3
+
+ARG DEBIAN_FRONTEND=noninteractive
+ENV CUDA_VISIBLE_DEVICES="0"
+
+COPY . /workspace
+
+#WORKDIR workspace
+
+RUN ["./setup_tf.sh"]

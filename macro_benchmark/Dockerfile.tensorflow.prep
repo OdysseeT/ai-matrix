@@ -1,0 +1,5 @@
+FROM odyssee/ai-matrix:latest
+
+
+
+RUN ["./prepare_dataset_tf.sh"]
